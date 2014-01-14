@@ -1,19 +1,15 @@
-Initiates events for HTML5 validation on provided elements.
+*Update: This is very old code, and was one of the last jQuery plugins I ever wrote. Don't be fooled by the commit dates.*
 
-For $(selector).validation(conf) to work correctly...
-When no 'form' is provided in 'conf', then all selected elements must be contained in the same form, or all selected elements must not be contained in any form. Otherwise all selected elements use what is provided explicitly by the value of conf.form.
+### Initiates events for HTML5 validation on provided elements.
 
-Invalidation is a pattern I learned a while ago. Basically it means, 'don't do anything, until something is wrong or has changed'.
-How it is implemented here is like this:
-The conf.className is not applied to or removed from an element, until the first time the invalid event is fired from that element, which is triggered with form.checkValidity().
+For `$(selector).validation(conf)` to work correctly...
+When no `form` is provided in `conf`, then all selected elements must be contained in the same form, or all selected elements must not be contained in any form. Otherwise all selected elements use what is provided explicitly by the value of `conf.form`.
 
-Things this thing does beyond the normal HTML5 spec:
+Invalidation is a pattern I learned a while ago. Basically it means, "don't do anything, until something is wrong or has changed". How it is implemented here is that the `conf.className` is not applied to or removed from an element, until the first time the invalid event is fired from that element, which is triggered when `form.checkValidity()` is invoked.
 
-1. Custom events triggered by this class:
-validinput
-invalidinput
-validchange
-invalidchange
+### Things this thing does beyond the normal HTML5 spec:
+
+1. Custom events triggered by this class: validinput, invalidinput, validchange, invalidchange
 
 2. When an element is initiated, this automatically adds listeners for invalid, input (maybe), and change. Everything is automated to add and remove a CSS classes on the elements individually and forms. This also adds a few more pieces of 'missing' functionality to the form. Like is dispatching an invalid event itself, but for only the first element that dispatched one. Access to a Boolean 'form.validation.valid' property based on all elements, and an Array of invalid elements in 'form.validation.invalid'.
 
@@ -24,14 +20,14 @@ invalidchange
 5. If the element has been invalidated and valueMissing is true, then the CSS class is removed regardless of validitiy. Otherwise the CSS class is added based on overall validity, but again, only if the element has been invalidated. This is just a personal preference for prettier UI, but may be removed in the future.
 
 Just to note, HTML5 ValidityStates:
-customError
-patternMismatch
-rangeOverflow
-rangeUnderflow
-stepMismatch
-tooLong
-typeMismatch
-valid
-valueMissing
+- customError
+- patternMismatch
+- rangeOverflow
+- rangeUnderflow
+- stepMismatch
+- tooLong
+- typeMismatch
+- valid
+- valueMissing
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/drkibitz/validation.js/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
